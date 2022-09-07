@@ -63,4 +63,10 @@ class userController extends Controller
 
         return redirect('login');
     }
+    public function videos(Request $request) {
+        return view('my_videos');
+    }
+    public function add_video(Request $request) {
+        return view('add_video');
+    }
 }
