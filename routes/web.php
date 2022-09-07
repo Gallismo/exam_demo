@@ -16,24 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::get( '/register',function (){
-    if (\Illuminate\Support\Facades\Auth::check()) {
-        return redirect('/profile');
-    }
-    return view( 'register');
+Route::middleware('isAuth')->group(function () {
+    Route::get('/profile', function () {
+        return view('profile');
+    });
 });
-Route::get('/login', function () {
-    if (\Illuminate\Support\Facades\Auth::check()) {
-        return redirect('/profile');
-    }
-    return view('login');
+Route::middleware('isGuest')->group(function () {
+    Route::get( '/register',function (){
+        return view( 'register');
+    });
+    Route::get('/login', function () {
+        return view('login');
+    });
 });
-Route::get('/profile', function () {
-    if (!\Illuminate\Support\Facades\Auth::check()) {
-        return redirect('/login');
-    }
-    return view('profile');
-});
+
+
 Route::get('/logout', [\App\Http\Controllers\userController::class, 'logout']);
 Route::post('/web/api/register',[\App\Http\Controllers\userController::class,'register']);
 Route::post('/web/api/login',[\App\Http\Controllers\userController::class,'login']);

@@ -9,6 +9,10 @@
     <title>Document</title>
 </head>
 <body>
+<<<<<<< HEAD
+    your profile
+    {{ \Illuminate\Support\Facades\Auth::user() }}
+=======
     <header>
         <h1 class="h1 jb">
             ТУТ ДОЛЖНО БЫТЬ ВАшЕ ИМЯ
@@ -26,5 +30,6 @@
                 ДОБАВИТЬ ВИДЕО
             </button></h1>
     </section>
+>>>>>>> 0a3526c010df6a4b5292599460347e2ff992ea32
 </body>
 </html>
