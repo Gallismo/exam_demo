@@ -36,3 +36,6 @@ Route::post('/web/api/register',[\App\Http\Controllers\userController::class,'re
 Route::post('/web/api/login',[\App\Http\Controllers\userController::class,'login']);
 Route::get('/videos', [\App\Http\Controllers\userController::class,'videos']);
 Route::get('/add_video',[\App\Http\Controllers\userController::class,'add_video']);
+Route::get('/index',[\App\Http\Controllers\userController::class,'index']);
+Route::get('/view_video',[\App\Http\Controllers\userController::class,'view_video']);
+Route::get('/admin_panel',[\App\Http\Controllers\userController::class,'admin_panel']);

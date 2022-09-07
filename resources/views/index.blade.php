@@ -14,7 +14,7 @@
         <a href="/register">Регистрация</a>
         <a href="/login">Войти</a>
     @else
-        <a href="/profile">Личный кабинет/ Мои видео</a>
+        <a href="/videos">Мои видео</a>
     @endif
 </div>
 <div class="container">

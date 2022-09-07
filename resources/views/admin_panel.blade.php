@@ -9,10 +9,7 @@
     <link rel="stylesheet" href="{{asset('style.css')}}">
 </head>
 <body>
-<div class="add_video">
-    <a href="/add_video" class="button_add_videos">+</a>
-    <a href="/logout" class="bt_log">logout</a>
-</div>
+
 <div class="container">
 
     <a href="/view_video" class="vd">

@@ -10,12 +10,16 @@
 </head>
 <body>
     <div class="add_video">
-            <a href="/add_video" class="button_add_videos">+</a>
+        <a href="/add_video" class="button_add_videos">+</a>
+        <a href="/logout" class="bt_log">logout</a>
     </div>
     <div class="container">
-        <video class="vd">
 
-        </video>
+            <a href="/view_video" class="vd">
+                <video class="vd">
+                </video>
+            </a>
+
         <h1 class="vd_name">
             Маша и медведь новые серии
         </h1>

@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{{asset('style.css')}}">
 </head>
 <body>
+<div>
+    <a href="/">На главную</a>
+</div>
 <form method="post" action="/web/api/register" class="login">
     @csrf
     <p>
