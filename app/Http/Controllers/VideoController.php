@@ -18,7 +18,9 @@ class VideoController extends Controller
         return view('videos', ['videos' => Video::all()]);
     }
     public function userVideos(Request $request) {
-        $videos = Video::where('user_id', Auth::user()->id)->get();
+        $videos = Video::where('user_id', Auth::id())->get();
+
+        collect([])->isEmpty();
 
         return view('my_videos', ['videos' => $videos]);
     }
@@ -49,6 +51,6 @@ class VideoController extends Controller
             'file' => $path
         ]);
 
-        return view('add_video', ['errors' => 'Success create']);
+        return redirect('/videos');
     }
 }
