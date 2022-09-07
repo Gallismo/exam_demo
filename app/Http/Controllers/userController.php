@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class userController extends Controller
 {
@@ -16,7 +17,7 @@ class userController extends Controller
         $val = Validator::make($request, [
             'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|max:255|unique:users|email',
-            'password' => 'required|string|max:255|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            'password' => ['required', 'string', Password::min(6)->letters()->mixedCase()->numbers()->symbols(), 'max:255'],
             'password_repeat' => 'required|string|max:255|same:password',
         ]);
 
@@ -39,7 +40,7 @@ class userController extends Controller
         $request=$request->all();
         $val = Validator::make($request, [
             'name' => 'required|string|max:255|exists:users,name',
-            'password' => 'required|string|max:255|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+            'password' => 'required|string'
         ]);
 
         if ($val->fails()) {

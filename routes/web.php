@@ -34,5 +34,8 @@ Route::middleware('isGuest')->group(function () {
 Route::get('/logout', [\App\Http\Controllers\userController::class, 'logout']);
 Route::post('/web/api/register',[\App\Http\Controllers\userController::class,'register']);
 Route::post('/web/api/login',[\App\Http\Controllers\userController::class,'login']);
-Route::get('/videos', [\App\Http\Controllers\userController::class,'videos']);
-Route::get('/add_video',[\App\Http\Controllers\userController::class,'add_video']);
+Route::get('/videos', [\App\Http\Controllers\VideoController::class,'userVideos']);
+Route::get('/add_video', function () {
+    return view('add_video');
+});
+Route::post('/add_video', [\App\Http\Controllers\VideoController::class, 'addVideo']);

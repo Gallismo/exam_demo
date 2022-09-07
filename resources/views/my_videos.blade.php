@@ -13,9 +13,11 @@
             <a href="/add_video" class="button_add_videos">+</a>
     </div>
     <div class="container">
-        <video class="vd">
-
-        </video>
+        @foreach($videos as $video)
+            <video class="vd" width="400" height="300" controls="controls">
+                <source src="{{$video->file}}">
+            </video>
+        @endforeach
         <h1 class="vd_name">
             Маша и медведь новые серии
         </h1>
