@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use function GuzzleHttp\Promise\all;
 
 class userController extends Controller
 {
@@ -25,12 +24,43 @@ class userController extends Controller
             return response()->json($val->errors(), 422);
         }
 
-        User::create([
+        $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password'])
         ]);
 
-        return redirect('/congrate');
+        Auth::login($user);
+
+        return redirect('/profile');
+    }
+
+    public function login(Request $request) {
+        $request=$request->all();
+        $val = Validator::make($request, [
+            'name' => 'required|string|max:255|exists:users,name',
+            'password' => 'required|string|max:255|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+        ]);
+
+        if ($val->fails()) {
+            return response()->json($val->errors(), 422);
+        }
+
+        $user = User::where('name', $request['name'])->first();
+
+        if (Hash::check($request['password'], $user->password)) {
+            Auth::login($user);
+            return redirect('/profile');
+        }
+
+        return response('Invalid login or password', 422);
+    }
+
+    public function logout(Request $request) {
+        if (Auth::check()) {
+            Auth::logout();
+        }
+
+        return redirect('login');
     }
 }

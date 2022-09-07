@@ -17,8 +17,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get( '/register',function (){
+    if (\Illuminate\Support\Facades\Auth::check()) {
+        return redirect('/profile');
+    }
     return view( 'register');
 });
-Route::get('/congrate',function (){
-   return view('congrate');
+Route::get('/login', function () {
+    if (\Illuminate\Support\Facades\Auth::check()) {
+        return redirect('/profile');
+    }
+    return view('login');
 });
+Route::get('/profile', function () {
+    if (!\Illuminate\Support\Facades\Auth::check()) {
+        return redirect('/login');
+    }
+    return view('profile');
+});
+Route::get('/logout', [\App\Http\Controllers\userController::class, 'logout']);
+Route::post('/web/api/register',[\App\Http\Controllers\userController::class,'register']);
+Route::post('/web/api/login',[\App\Http\Controllers\userController::class,'login']);
+

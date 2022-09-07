@@ -9,24 +9,16 @@
     <link rel="stylesheet" href="{{asset('style.css')}}">
 </head>
 <body>
-<form method="post" action="/web/api/register" class="login">
+<h1 class="center white">Вход</h1>
+<form method="post" action="/web/api/login" class="login">
     @csrf
     <p>
         <label for="name">Имя:</label>
         <input type="text" name="name" id="name" value="">
     </p>
-
-    <p>
-        <label for="email">Email:</label>
-        <input type="text" name="email" id="email" value="">
-    </p>
     <p>
         <label for="password">Пароль:</label>
         <input type="text" name="password" id="password" value="">
-    </p>
-    <p>
-        <label for="password_repeat">Повторите пароль:</label>
-        <input type="text" name="password_repeat" id="password_repeat" value="">
     </p>
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     <p class="login-submit">
