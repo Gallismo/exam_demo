@@ -10,6 +10,5 @@
 <body>
     your profile
     {{ \Illuminate\Support\Facades\Auth::user() }}
-    <a href="/logout">logout</a>
 </body>
 </html>
