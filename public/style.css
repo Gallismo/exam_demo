@@ -343,10 +343,8 @@ div.container{
     flex-direction: column;
     align-items: center;
 }
-div.vd{
-    width: 1024px;
-    height: 768px;
-    background: #161616;
+.vd{
+    background-color: black;
 }
 div h1 {
     color: white;

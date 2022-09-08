@@ -51,6 +51,7 @@ return new class extends Migration
             $table->unsignedBigInteger('video_id');
             $table->foreign('video_id')->references('id')
                 ->on('videos')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->string('text');
             $table->timestamps();
 
         });

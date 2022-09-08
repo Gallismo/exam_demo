@@ -33,7 +33,7 @@ class userController extends Controller
 
         Auth::login($user);
 
-        return redirect('/profile');
+        return redirect('/');
     }
 
     public function login(Request $request) {
@@ -51,7 +51,7 @@ class userController extends Controller
 
         if (Hash::check($request['password'], $user->password)) {
             Auth::login($user);
-            return redirect('index');
+            return redirect('/');
         }
 
         return response('Invalid login or password', 422);
@@ -62,22 +62,12 @@ class userController extends Controller
             Auth::logout();
         }
 
-        return redirect('login');
+        return redirect('/');
     }
-    public function videos(Request $request) {
-        return view('my_videos');
-    }
-    public function add_video(Request $request) {
-        return view('add_video');
-    }
-    public function index(Request $request){
-        return view('index');
-    }
-    public function view_video(Request $request){
-        return view('view_video');
-    }
+
+
     public function admin_panel(Request $request){
-        return view('admin_panel');
+        return view('index', ['view' => 'admin_panel']);
     }
 
 }

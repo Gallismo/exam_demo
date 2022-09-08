@@ -1,50 +1,39 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{asset('style.css')}}">
-</head>
-<body>
-<a href="/videos"  class="bt_log">Мои видео</a>
 <div class="container">
-    <video class="vd">
-
+    <video class="vd" width="426" height="240" controls="controls">
+        <source src="{{$video->file}}">
     </video>
     <h1 class="vd_name">
-        Маша и медведь новые серии
+        {{$video->name}}
     </h1>
     <div class="dsp_vid">
-        <h3 class="description_vid">Детский мультик созданный для детей с целью просмотра мультика детьми </h3>
-        <h3 class="like_vid">5</h3>
-        <h3 class="dislike_vid">2</h3>
-        <h3 class="data_vid">11:10 01.09.2022</h3>
+        <h3 class="description_vid">{{$video->description ?? 'Описание отсутсвует'}}</h3>
+        <h3 class="like_vid">{{$video->likes}} лайков</h3>
+        <h3 class="dislike_vid">{{$video->dislikes}} дизлайков</h3>
+        <h3 class="data_vid">{{$video->created_at}}</h3>
         <div>
-            <p>
+            <form method="post" action="/web/api/comment">
+                @csrf
                 <label for="comments_vid" class="comments_h">Ком-рий:</label>
-                <input type="text" name="comments" id="comments_vid" value="">
-                <button>
-                    ТУТ КНОПКА ОПУБЛИКОВАТЬ КОММЕНТАРИЙ
-                </button>
-                <div>
-                    <h3 >ТУТ ИМЯ КОМЕНТАТОРА</h3>
-                    <h4> ТУТ ДАТА И ВРЕМЯ ОСТАВЛЕННОГО КОМЕНТАРИЯ </h4>
-                    <div>
-                        <h3 class="comments">ТУТ ДОЛЖНЫ БЫТЬ КОММЕНТАРИИ</h3>
+                <input type="text" name="comment" id="comments_vid" value="">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="video_id" value="{{ $video->id }}" />
+                <button type="submit">Опубликовать</button>
+            </form>
+
+            @if($comments->isEmpty())
+                Комментариев нет
+            @else
+                @foreach($comments as $comment)
+                    <div class="comment">
+                        <h3>{{\App\Models\User::find($comment->user_id)->name}}</h3>
+                        <h4>{{$comment->created_at}}</h4>
+                        <div>
+                            <h3>{{$comment->text}}</h3>
+                        </div>
                     </div>
-                </div>
-
-            </p>
+                    <hr>
+                @endforeach
+            @endif
         </div>
-
-
-
-
-
     </div>
 </div>
-</body>
-</html>
