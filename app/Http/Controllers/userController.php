@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -67,7 +68,10 @@ class userController extends Controller
 
 
     public function admin_panel(Request $request){
-        return view('index', ['view' => 'admin_panel']);
+        $videos = Video::all();
+
+
+        return view('index', ['view' => 'admin_panel', 'videos' => $videos]);
     }
 
 }

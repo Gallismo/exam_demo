@@ -10,11 +10,16 @@
         <input type="text" name="description" id="description_vid" value="">
     </p>
     <p>
-        <label for="category">Категория:</label>
-        <input type="text" name="category" id="category_vid" value="">
+        <label for="category_vid">Категория:</label>
+        <select name="category" id="category_vid">
+            @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select>
     </p>
     <p>
         <label for="add_vid">Выберите файл:</label>
+
         <input type="file" name="add_vid" id="add_vid" value="" accept="video/mp4" class="add_vid">
     </p>
     <p>
@@ -23,7 +28,7 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 </form>
 @if($errors)
-    <div>
+    <div class="error">
         <h3>{{ $errors }}</h3>
     </div>
 @endif

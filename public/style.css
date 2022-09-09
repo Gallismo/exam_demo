@@ -94,7 +94,7 @@ input, button, label {
     box-sizing: border-box;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], select {
     padding: 0 10px;
     width: 300px;
     height: 40px;
@@ -346,6 +346,16 @@ div.container{
 .vd{
     background-color: black;
 }
+
+.likes {
+    display: flex;
+}
+.buttons {
+    display: flex !important;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
 div h1 {
     color: white;
 }
@@ -367,4 +377,11 @@ div h4{
 }
 .comments_h{
     color: white;
+}
+.error {
+    font-size: 30px;
+}
+
+.error * {
+    color: red;
 }

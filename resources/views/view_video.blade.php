@@ -7,8 +7,30 @@
     </h1>
     <div class="dsp_vid">
         <h3 class="description_vid">{{$video->description ?? 'Описание отсутсвует'}}</h3>
-        <h3 class="like_vid">{{$video->likes}} лайков</h3>
-        <h3 class="dislike_vid">{{$video->dislikes}} дизлайков</h3>
+        <div class="likes">
+            <h3 class="like_vid">{{$video->likes}} лайков</h3>
+            <form method="post" action="/web/api/likes">
+                @csrf
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="video_id" value="{{ $video->id }}" />
+                <input type="hidden" name="action" value="like" />
+                <p>
+                    <button type="submit">Like</button>
+                </p>
+            </form>
+        </div>
+        <div class="likes">
+            <h3 class="dislike_vid">{{$video->dislikes}} дизлайков</h3>
+            <form method="post" action="/web/api/likes">
+                @csrf
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="video_id" value="{{ $video->id }}" />
+                <input type="hidden" name="action" value="dislike" />
+                <p>
+                    <button type="submit">Dislike</button>
+                </p>
+            </form>
+        </div>
         <h3 class="data_vid">{{$video->created_at}}</h3>
         <div>
             <form method="post" action="/web/api/comment">
@@ -19,7 +41,7 @@
                 <input type="hidden" name="video_id" value="{{ $video->id }}" />
                 <button type="submit">Опубликовать</button>
             </form>
-
+            <hr>
             @if($comments->isEmpty())
                 Комментариев нет
             @else

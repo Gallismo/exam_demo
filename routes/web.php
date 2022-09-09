@@ -18,10 +18,11 @@ Route::middleware('isAuth')->group(function () {
     Route::get('/videos', [\App\Http\Controllers\VideoController::class,'userVideos']);
     Route::get('/logout', [\App\Http\Controllers\userController::class, 'logout']);
     Route::get('/add_video', function () {
-        return view('index', ['view' => 'add_video']);
+        return view('index', ['view' => 'add_video', 'categories' => \App\Models\Category::all()]);
     });
     Route::post('/add_video', [\App\Http\Controllers\VideoController::class, 'addVideo']);
     Route::post('/web/api/comment',[\App\Http\Controllers\VideoController::class,'comment']);
+    Route::post('/web/api/likes',[\App\Http\Controllers\VideoController::class,'likes']);
 });
 Route::middleware('isGuest')->group(function () {
     Route::get( '/register',function (){
@@ -33,6 +34,7 @@ Route::middleware('isGuest')->group(function () {
 });
 Route::middleware('isAdmin')->group(function () {
     Route::get('/admin',[\App\Http\Controllers\userController::class,'admin_panel']);
+    Route::post('/web/api/ban',[\App\Http\Controllers\VideoController::class,'ban']);
 });
 
 Route::get('/', [\App\Http\Controllers\VideoController::class, 'index']);
